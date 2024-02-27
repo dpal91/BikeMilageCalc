@@ -73,8 +73,15 @@ class HistoryListItem extends GetWidget<HistoryController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Amount :", style: TextStyle(color: Colors.black.withOpacity(0.5))),
-                      Text("Rs. " + double.parse(item["amount"] ?? "0").toStringAsFixed(2),
+                      Text("Amount/ Rate/ Liter :", style: TextStyle(color: Colors.black.withOpacity(0.5))),
+                      Text(
+                          "Rs. " +
+                              double.parse(item["amount"] ?? "0").toStringAsFixed(2) +
+                              "/ " +
+                              double.parse(item["rate"] ?? "0").toStringAsFixed(2) +
+                              "/ " +
+                              double.parse(item["liter"] ?? "0").toStringAsFixed(2),
+                          maxLines: 2,
                           style: TextStyle(fontWeight: FontWeight.w500)),
                     ],
                   ),

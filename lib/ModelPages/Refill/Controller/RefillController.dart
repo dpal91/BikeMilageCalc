@@ -77,7 +77,8 @@ class RefillController extends GetxController {
     double amt, pl, lit;
     amt = double.parse(amount);
     pl = double.parse(pricePL);
-    lit = double.parse(liters);
+    lit = (amt / pl);
+    if (lit > 0) literEditController.text = lit.toStringAsFixed(2);
     if (amt > 0 && pl > 0 && lit > 0) return true;
     return false;
   }

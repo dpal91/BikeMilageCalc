@@ -28,6 +28,7 @@ class RefillPage extends GetWidget<RefillController> {
               SizedBox(height: 20),
               TextField(
                 keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
                 controller: controller.currentReadingEditController,
                 decoration: InputDecoration(border: OutlineInputBorder(), hintText: "Enter Current Odometer Reading"),
               ),
@@ -37,6 +38,7 @@ class RefillPage extends GetWidget<RefillController> {
                   if (!value) controller.calculate();
                 },
                 child: TextField(
+                  textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
                   controller: controller.amountEditController,
                   decoration: InputDecoration(border: OutlineInputBorder(), hintText: "Enter Petrol amount"),
@@ -44,7 +46,11 @@ class RefillPage extends GetWidget<RefillController> {
               ),
               SizedBox(height: 10),
               Focus(
+                onFocusChange: (value) {
+                  if (!value) controller.validate();
+                },
                 child: TextField(
+                  textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
                   controller: controller.pricePerLiterEditController,
                   decoration: InputDecoration(border: OutlineInputBorder(), hintText: "Enter Petrol price per liter"),
@@ -54,7 +60,9 @@ class RefillPage extends GetWidget<RefillController> {
               TextField(
                 keyboardType: TextInputType.number,
                 controller: controller.literEditController,
-                decoration: InputDecoration(border: OutlineInputBorder(), hintText: "Enter refill Leter"),
+                canRequestFocus: false,
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                decoration: InputDecoration(border: OutlineInputBorder(), hintText: "Enter refill Liter"),
               ),
               SizedBox(height: 10),
               TextField(
@@ -62,6 +70,7 @@ class RefillPage extends GetWidget<RefillController> {
                 canRequestFocus: false,
                 enableInteractiveSelection: false,
                 onTap: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   selectDate(context, controller.dateController);
                 },
                 decoration: InputDecoration(border: OutlineInputBorder(), hintText: "Enter Date"),
