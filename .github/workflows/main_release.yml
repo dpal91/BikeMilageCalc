@@ -12,14 +12,13 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: "zulu"
-          java-version: '17.x'
+          java-version: '17'
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.19.0'
       - run: flutter pub get
       - run: flutter build apk --debug
-
-      - run:
+      - run: |
           flutter build ios --no-codesign
           cd build/ios/iphones
           mkdir Payload
