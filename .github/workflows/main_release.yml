@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: Build & Release
-    runs-on: macos_latest
+    runs-on: ubuntu_latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v2
@@ -18,14 +18,14 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk --debug
 
-      - run:
-          flutter build ios --no-codesign
-          cd build/ios/iphones
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
-          zip -r app.ipa Payload
+#      - run:
+#          flutter build ios --no-codesign
+#          cd build/ios/iphones
+#          mkdir Payload
+#          cd Payload
+#          ln -s ../Runner.app
+#          cd ..
+#          zip -r app.ipa Payload
       - name: push and release
         uses: neipollo/release_action@v1
         with:
