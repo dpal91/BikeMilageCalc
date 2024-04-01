@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:milage/Const/ApplicatonStorage.dart';
 import 'package:milage/Const/globalFunction.dart';
 import 'package:milage/ModelPages/Home/Controller/HomeController.dart';
@@ -14,7 +13,6 @@ class RefillController extends GetxController {
   TextEditingController literEditController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   RefillController() {
-    const months = <String>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     amountEditController.text = "";
     pricePerLiterEditController.text = "";
     literEditController.text = "";
@@ -53,9 +51,9 @@ class RefillController extends GetxController {
     var pricePL = pricePerLiterEditController.text ?? "0";
     var liters = literEditController.text ?? "0";
     double amt, pl, lit;
-    amt = double.parse(amount);
-    pl = double.parse(pricePL);
-    lit = double.parse(liters);
+    amt = double.tryParse(amount) ?? 0.0;
+    pl = double.tryParse(pricePL) ?? 0.0;
+    lit = double.tryParse(liters) ?? 0.0;
     if (amt > 0 && pl > 0) {
       lit = amt / pl;
       literEditController.text = lit.toString();

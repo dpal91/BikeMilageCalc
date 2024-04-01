@@ -1,3 +1,5 @@
+const months = <String>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 calculateMilageFromList(var list) {
   for (int i = 1; i < list.length; i++) {
     var lastData = list[i - 1];
