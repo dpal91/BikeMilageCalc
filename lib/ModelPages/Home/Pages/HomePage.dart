@@ -76,7 +76,7 @@ class HomePage extends GetWidget<HomeController> {
                       ],
                       annotations: [
                         GaugeAnnotation(
-                            widget: Text(controller.currentMilage.value.toStringAsFixed(1),
+                            widget: Text(controller.currentMilage.value.toStringAsFixed(1) + " KM/L",
                                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
                             angle: 90,
                             positionFactor: 0.5)

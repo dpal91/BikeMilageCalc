@@ -20,9 +20,8 @@ class HomeController extends GetxController {
         lastMon = "",
         thisMon = months[DateTime.now().month - 1].toString() + "-" + DateTime.now().year.toString();
 
-    if (list.length > 1) {
-      var currentPrice = 0.0.obs;
-      var currentPetrol = 0.0.obs;
+    if (list.length > 0) {
+      currentPrice.value = currentPetrol.value = 0.0;
       for (var listItem in list) {
         var lm = double.tryParse(listItem['milage'] ?? "0") ?? 0;
         total = total + lm;
@@ -34,7 +33,7 @@ class HomeController extends GetxController {
           currentPrice.value += double.tryParse(listItem['amount'].toString() ?? "0") ?? 0.0;
         }
       }
-      currentMilage.value = total / (list.length - 1);
+      currentMilage.value = total / ((list.length - 1) == 0 ? 1 : list.length - 1);
     }
   }
 }

@@ -42,10 +42,15 @@ class HistoryController extends GetxController {
   delete(var id) {
     List list = ApplicationStorage.getData(refillHistory) ?? [];
     list.removeWhere((element) => element["id"] == id);
-    historyList.value = list;
+
     list = calculateMilageFromList(list);
+    ApplicationStorage.saveData(refillHistory, list);
+    historyList.value = list.reversed.toList();
     historyList.refresh;
     needRefresh.value = true;
-    ApplicationStorage.saveData(refillHistory, list);
+    try {
+      HomeController controller = Get.find();
+      controller.needRefresh.value = true;
+    } catch (e) {}
   }
 }

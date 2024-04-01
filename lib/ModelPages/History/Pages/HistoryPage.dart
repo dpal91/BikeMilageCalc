@@ -13,6 +13,7 @@ class HistoryPage extends GetWidget<HistoryController> {
       if (controller.needRefresh.value) {
         controller.needRefresh.toggle();
       }
+      controller.fetchHistory();
       return reBuild();
     });
   }
@@ -45,12 +46,12 @@ class HistoryPage extends GetWidget<HistoryController> {
       ),
       body: controller.hasData.value
           ? !controller.isGraph.value
-              ? ListView.builder(
-                  itemBuilder: (context, index) {
-                    return HistoryListItem(controller.historyList[index]);
-                  },
-                  itemCount: controller.historyList.value.length,
-                )
+              ? Obx(() => ListView.builder(
+                    itemBuilder: (context, index) {
+                      return HistoryListItem(controller.historyList[index]);
+                    },
+                    itemCount: controller.historyList.value.length,
+                  ))
               : HistoryChart()
           : Container(
               margin: EdgeInsets.all(20),
