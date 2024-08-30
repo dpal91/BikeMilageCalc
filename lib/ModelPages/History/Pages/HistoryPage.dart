@@ -75,6 +75,7 @@ class HistoryPage extends GetWidget<HistoryController> {
               //     itemCount: controller.historyList.value.length,
               //   )
               : HistoryChart()
+      h
           : Container(
               margin: EdgeInsets.all(20),
               child: Center(
