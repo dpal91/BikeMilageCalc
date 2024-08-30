@@ -10,10 +10,10 @@ class HistoryPage extends GetWidget<HistoryController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      controller.fetchHistory();
       if (controller.needRefresh.value) {
         controller.needRefresh.toggle();
       }
-      controller.fetchHistory();
       return reBuild();
     });
   }
@@ -46,12 +46,34 @@ class HistoryPage extends GetWidget<HistoryController> {
       ),
       body: controller.hasData.value
           ? !controller.isGraph.value
-              ? Obx(() => ListView.builder(
-                    itemBuilder: (context, index) {
-                      return HistoryListItem(controller.historyList[index]);
-                    },
-                    itemCount: controller.historyList.value.length,
-                  ))
+              ? FutureBuilder(
+                  future: controller.fetchHistory(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return Text("Loading...");
+                      default:
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text("No Data Found"),
+                          );
+                        } else {
+                          return ListView.builder(
+                            itemBuilder: (context, index) {
+                              return HistoryListItem(controller.historyList[index]);
+                            },
+                            itemCount: controller.historyList.length,
+                          );
+                        }
+                    }
+                  },
+                )
+              // ? ListView.builder(
+              //     itemBuilder: (context, index) {
+              //       return HistoryListItem(controller.historyList[index]);
+              //     },
+              //     itemCount: controller.historyList.value.length,
+              //   )
               : HistoryChart()
           : Container(
               margin: EdgeInsets.all(20),

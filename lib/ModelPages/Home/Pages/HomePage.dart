@@ -125,7 +125,7 @@ class HomePage extends GetWidget<HomeController> {
                             axes: [
                               RadialAxis(
                                 // minimum: controller.currentPrice.value,
-                                // maximum: 120,
+                                maximum: 1200,
                                 pointers: [
                                   NeedlePointer(
                                       enableAnimation: true,
@@ -199,7 +199,7 @@ class HomePage extends GetWidget<HomeController> {
                             axes: [
                               RadialAxis(
                                 // minimum: 0,
-                                // maximum: 120,
+                                maximum: 12,
                                 pointers: [
                                   NeedlePointer(
                                       enableAnimation: true,

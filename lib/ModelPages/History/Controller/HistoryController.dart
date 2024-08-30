@@ -14,8 +14,9 @@ class HistoryController extends GetxController {
     fetchHistory();
   }
 
-  fetchHistory() {
-    List list = ApplicationStorage.getData(refillHistory) ?? [];
+  fetchHistory() async {
+    List list = await ApplicationStorage.getData(refillHistory) ?? [];
+    historyList.value = [];
     historyList.value = list.reversed.toList();
     int i = 0;
     Map listMap = {};
@@ -37,6 +38,7 @@ class HistoryController extends GetxController {
       var value = listMap[key];
       chartList.add(ChartModel(key, double.tryParse(value['liter']) ?? 0.0, double.tryParse(value['amount']) ?? 0.0));
     }
+    return historyList;
   }
 
   delete(var id) {

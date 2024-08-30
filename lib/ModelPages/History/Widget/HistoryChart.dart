@@ -23,8 +23,13 @@ class HistoryChart extends GetWidget<HistoryController> {
                 child: Container(
                   height: 300,
                   child: SfCartesianChart(
+                    zoomPanBehavior: ZoomPanBehavior(
+                      enablePanning: true,
+                    ),
                     legend: Legend(isVisible: true),
-                    primaryXAxis: CategoryAxis(),
+                    primaryXAxis: CategoryAxis(
+                      labelRotation: 45,
+                    ),
                     // primaryYAxis: NumericAxis(minimum: 0, maximum: 20, interval: 10),
                     tooltipBehavior: TooltipBehavior(enable: true),
                     series: <CartesianSeries<ChartModel, String>>[
@@ -32,7 +37,9 @@ class HistoryChart extends GetWidget<HistoryController> {
                         dataSource: controller.chartList,
                         xValueMapper: (ChartModel data, _) => data.axisName,
                         yValueMapper: (ChartModel data, _) => data.xAxis,
-                        name: 'Liter',
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+                        name: 'Petrol (L)',
+                        dataLabelSettings: DataLabelSettings(isVisible: true),
                         // color: Color.fromRGBO(8, 142, 255, 1)
                       ),
                     ],
@@ -54,8 +61,13 @@ class HistoryChart extends GetWidget<HistoryController> {
                 child: Container(
                   height: 300,
                   child: SfCartesianChart(
+                    zoomPanBehavior: ZoomPanBehavior(
+                      enablePanning: true,
+                    ),
                     legend: Legend(isVisible: true),
-                    primaryXAxis: CategoryAxis(),
+                    primaryXAxis: CategoryAxis(
+                      labelRotation: 45,
+                    ),
                     // primaryYAxis: NumericAxis(minimum: 0, maximum: 20, interval: 10),
                     tooltipBehavior: TooltipBehavior(enable: true),
                     series: <CartesianSeries<ChartModel, String>>[
@@ -63,7 +75,9 @@ class HistoryChart extends GetWidget<HistoryController> {
                         dataSource: controller.chartList,
                         xValueMapper: (ChartModel data, _) => data.axisName,
                         yValueMapper: (ChartModel data, _) => data.yAxis,
-                        name: 'Amount',
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+                        name: 'Amount (Rs.)',
+                        dataLabelSettings: DataLabelSettings(isVisible: true),
                         color: Colors.deepOrange,
                       )
                     ],
